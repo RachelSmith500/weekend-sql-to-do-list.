@@ -3,7 +3,7 @@ const pg = require('pg');
 // setup pg to connect with the database
 const Pool = pg.Pool;
 const pool = new Pool({
-    database: 'koala_data',          // name of db
+    database: 'to_do_app',          // name of db
     host: 'localhost',          // where is the database
     port: 5432,                 // port for db, 5432 is standard for postgres
     max: 10,                    // max connections (queries) at one time

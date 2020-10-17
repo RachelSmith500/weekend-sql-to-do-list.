@@ -3,10 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
     <script src="vendors/jquery-3.3.1.min.js" charset="utf-8"></script>
     <script src="scripts/client.js" charset="utf-8"></script>
+    <title>To Do App</title>
+</head>
+<body>
+    <header>
+        <p>To Do App</p>
+    </header>
+    <section id="addNewTask">
+        <h2>Add Task</h2>
+            <label htmlFor "taskName">Task Name:</label>
+            <input id="taskName" type="text" placeholder="Task Name"/>
+            <label htmlFor "priorityLevel">Priority Level:</label>
+            <input id="priorityLevel" type="text" placeholder="Priority Level"/>
+            <label htmlFor "completionTimeline">Completion Timeline:</label>
+            <input id="completionTimeline" type="text" placeholder="Completion Timeline"/>
+            <label htmlFor "completed">Completed:</label>
+            <input id="completed" type="text" placeholder="Completed"/>
+            <label htmlFor "additionalNotes">Additional Notes:</label>
+            <input id="additionalNotes" type="text" placeholder="Additional Notes"/>
+            <button type="button" id="addTask">Add Task</button>
+    </section>
+    <main>
+        <h2>All Tasks</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Task Name</th>
+              <th>Priority Level</th>
+              <th>Completion Timeline</th>
+              <th>Completed</th>
+              <th>Additional Notes</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody id="targetNewToDo">
+          </tbody>
+        </table>
+    </main>
 </body>
 </html>

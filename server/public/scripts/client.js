@@ -5,6 +5,7 @@ $(document).ready(function(){
 });
 
 function clickListeners(){
+    $('#targetNewToDo').on('click', '.deleteBtn', deleteTask)
     $('#addTask').on('click', function(){
         console.log('in addTask on click');
         
@@ -17,3 +18,46 @@ function clickListeners(){
         };
     });
 }
+
+function getTasks(){
+    console.log( 'in getTasks' );
+  $.ajax({
+    type: 'GET',
+    url: '/toDoApp'
+  }).then(function(response) {
+    console.log("in GET toDoApp", response);
+    $('#targetNewToDo').empty();
+    for (let i = 0; i < response.length; i++) {
+      if(!response[i].completed) {
+      $('#targetNewToDo').append(`
+        <tr data-id=${response[i].id}>
+            <td>${response[i].task_name}</td>
+            <td>${response[i].priority_level}</td>
+            <td>${response[i].completion_timeline}</td>
+            <td>${response[i].completed}</td>
+            <td>${response[i].additional_notes}</td>
+            <td><button class="completedBtn">Completed</button></td>
+            <td><button class="deleteBtn">Delete</button></td>
+        </tr>
+      `);
+      }
+      else {
+        $('#targetNewToDo').append(`
+        <tr data-id=${response[i].id}>
+            <td>${response[i].task_name}</td>
+            <td>${response[i].priority_level}</td>
+            <td>${response[i].completion_timeline}</td>
+            <td>${response[i].completed}</td>
+            <td>${response[i].additional_notes}}</td>
+            <td></td>
+            <td><button class="deleteBtn">Delete</button></td>
+        </tr>
+      `);
+      }
+    }
+  }).catch(function(error){
+    console.log('error in GET', error);
+    
+  });
+  
+  }

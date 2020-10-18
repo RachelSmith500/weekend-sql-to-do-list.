@@ -4,6 +4,7 @@ $(document).ready(function(){
     console.log('jq');
     getTasks();
     clickListeners();
+    $('#targetNewToDo').on('click', '.deleteBtn', deleteTasks);
 });
 
 function clickListeners(){
@@ -139,20 +140,20 @@ function getTasks(){
       console.log('In uncomplete', error);
     })
   }
-//   function deleteTasks(){
-//     console.log('delete clicked');
-//     let taskId = $(this).closest('tr').data('id');
-//     console.log(taskId);
+  function deleteTasks(){
+    console.log('delete clicked');
+    let taskId = $(this).closest('tr').data('id');
+    console.log(taskId);
     
-//     $.ajax({
-//         method: 'DELETE',
-//         url: `/tasks/${taskId}`,
-//     }).then(function(response){
-//         console.log(response);
-//         getKoalas(); 
-//     }).catch(function(error){
-//         console.log('error', error); 
-//     });
+    $.ajax({
+        method: 'DELETE',
+        url: `/toDoApp/${taskId}`,
+    }).then(function(response){
+        console.log(response);
+        getTasks(); 
+    }).catch(function(error){
+        console.log('error', error); 
+    });
     
-//   }
+  }
 

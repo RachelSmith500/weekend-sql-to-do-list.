@@ -34,22 +34,38 @@ router.get('/', (req, res) => {
     });
 });
 
-router.put('/completed/:idParam', (req,res) => {
-    console.log('in put request', req.body.direction, req.params.idParam );
-    let queryText = '';
-    // create SQL Query
-    if(req.body.direction === "true"){
-        queryText = `UPDATE "tasks" SET "completed" = "true" WHERE "id" = $1;`;
-    } else {
-        queryText = `UPDATE "tasks" SET "completed" = "false" WHERE "id" = $1;`;
-    }
-    pool.query(queryText, [req.params.idParam]).then((result) => {
-        console.log('result from put', result);
+    router.put("/T/:id", (req, res) => {
+    console.log("In Put", req.params.id, req.body);
+    let queryText = `
+        UPDATE "tasks"
+        SET "completed" = 'YES'
+        WHERE "id" = $1;
+        `;
+    pool.query(queryText, [req.params.id])
+      .then((result) => {
         res.sendStatus(200);
-    }).catch((error) => {
-        console.log('error in put', error);
+      })
+      .catch((error) => {
+        console.log("error in complete", error);
         res.sendStatus(500);
-    });
-});
+      });
+  });
+
+    router.put("/U/:id", (req, res) => {
+    console.log("In Put", req.params.id, req.body);
+    let queryText = `
+        UPDATE "tasks"
+        SET "completed" = 'NO'
+        WHERE "id" = $1;
+        `;
+    pool.query(queryText, [req.params.id])
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((error) => {
+        console.log("error in complete", error);
+        res.sendStatus(500);
+      });
+  });
 
 module.exports = router;

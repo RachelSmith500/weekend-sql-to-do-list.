@@ -20,7 +20,7 @@ function clickListeners(){
         };
         // saveTask(taskToSend);
         // clearInputs();
-        if(taskToSend.taskName === ''|| taskToSend.priorityLevel === '' || taskToSend.deadline === '' || taskToSend.complete === '' || taskToSend.additionalNotes === ''){
+        if(taskToSend.taskName === ''|| taskToSend.priorityLevel === '' || taskToSend.deadline === '' || taskToSend.completed === '' || taskToSend.additionalNotes === ''){
             alert('Please enter all fields.');
          } else if (taskToSend.completed.toLowerCase() === 'yes' || taskToSend.completed.toLowerCase() === 'no'){
              // (taskToSend);
@@ -31,6 +31,8 @@ function clickListeners(){
          }
        
     });
+    $('#targetNewToDo').on('click', '.completedBtn', completeTask);
+    $('#targetNewToDo').on('click', '.uncompleteBtn', unCompleteTask);  
 }
 
 function getTasks(){
@@ -42,7 +44,7 @@ function getTasks(){
     console.log("in GET toDoApp", response);
     $('#targetNewToDo').empty();
     for (let i = 0; i < response.length; i++) {
-      if(!response[i].completed) {
+      if(response[i].completed.toLowerCase() == 'no') {
       $('#targetNewToDo').append(`
         <tr data-id=${response[i].id}>
             <td>${response[i].task_name}</td>
@@ -63,8 +65,9 @@ function getTasks(){
             <td>${response[i].completion_timeline}</td>
             <td>${response[i].completed}</td>
             <td>${response[i].additional_notes}</td>
-            <td></td>
+            <td><button class="uncompleteBtn">Mark as Incomplete</button></td>
             <td><button class="deleteBtn">Delete</button></td>
+            
         </tr>
       `);
       }
@@ -85,8 +88,7 @@ function getTasks(){
     }).then(function(response) {
       console.log('response', response);
       getTasks();
-      clearInputs();
-  
+    //   clearInputs();
     }).catch(function(error) {
       console.log('error in post', error);
       
@@ -101,23 +103,42 @@ function getTasks(){
     $('#additionalNotes').val('');
   }
 
-  function editCompletion(){
-    let completedYesNo = $(this).data('direction');
-    let taskId = $(this).closest('tr').data('id');
-    console.log("clicked", completedYesNo, taskId);
-  
+  function completeTask(){
+    console.log('Completing task!');
+    // let colorToComplete = $(this).closest('tr').addClass("color");
+    let idToComplete = $(this).closest('tr').data('id');
+    console.log(idToComplete)
+    let completeStatus = {
+      completed: 'YES'
+    };
     $.ajax({
-        method: 'PUT',
-        url: `/task_data/completed/${taskId}`,
-        data: {direction: completedYesNo}
-    }).then(function (response){
-        console.log('response', response);
-        getTasks();
-    }).catch(function(error){
-        console.log('error in put', error);
-    });
+      method: 'PUT',
+      url: `/toDoApp/T/${idToComplete}`, 
+      data: completeStatus
+    }).then(function() {
+      getTasks();
+    }).catch(function(error) {
+      console.log('In complete', error);
+    })
   }
-
+//Allows user to revers complete 
+  function unCompleteTask(){
+    console.log('Whops that was not complete!');
+    // $(this).closest('tr').removeClass("color");
+    let idToComplete = $(this).closest('tr').data('id');
+    let completeStatus = {
+      completed: 'NO'
+    };
+    $.ajax({
+      method: 'PUT',
+      url: `/toDoApp/U/${idToComplete}`, 
+      data: completeStatus
+    }).then(function() {
+      getTasks();
+    }).catch(function(error) {
+      console.log('In uncomplete', error);
+    })
+  }
 //   function deleteTasks(){
 //     console.log('delete clicked');
 //     let taskId = $(this).closest('tr').data('id');

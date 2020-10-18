@@ -18,8 +18,18 @@ function clickListeners(){
             completed: $('#completed').val(),
             additionalNotes: $('#additionalNotes').val()
         };
-
-        saveTask(taskToSend);
+        // saveTask(taskToSend);
+        // clearInputs();
+        if(taskToSend.taskName === ''|| taskToSend.priorityLevel === '' || taskToSend.deadline === '' || taskToSend.complete === '' || taskToSend.additionalNotes === ''){
+            alert('Please enter all fields.');
+         } else if (taskToSend.completed.toLowerCase() === 'yes' || taskToSend.completed.toLowerCase() === 'no'){
+             // (taskToSend);
+             saveTask(taskToSend);
+             clearInputs();
+         }else{
+             alert('Complete input must be YES or NO')
+         }
+       
     });
 }
 
@@ -83,10 +93,45 @@ function getTasks(){
     });
   }
 
-  function clearInputs() {
+  function clearInputs(){
     $('#taskName').val('');
     $('#priorityLevel').val('');
-    $('#completionTimeLine').val('');
+    $('#completionTimeline').val('');
     $('#completed').val('');
     $('#additionalNotes').val('');
   }
+
+  function editCompletion(){
+    let completedYesNo = $(this).data('direction');
+    let taskId = $(this).closest('tr').data('id');
+    console.log("clicked", completedYesNo, taskId);
+  
+    $.ajax({
+        method: 'PUT',
+        url: `/task_data/completed/${taskId}`,
+        data: {direction: completedYesNo}
+    }).then(function (response){
+        console.log('response', response);
+        getTasks();
+    }).catch(function(error){
+        console.log('error in put', error);
+    });
+  }
+
+//   function deleteTasks(){
+//     console.log('delete clicked');
+//     let taskId = $(this).closest('tr').data('id');
+//     console.log(taskId);
+    
+//     $.ajax({
+//         method: 'DELETE',
+//         url: `/tasks/${taskId}`,
+//     }).then(function(response){
+//         console.log(response);
+//         getKoalas(); 
+//     }).catch(function(error){
+//         console.log('error', error); 
+//     });
+    
+//   }
+

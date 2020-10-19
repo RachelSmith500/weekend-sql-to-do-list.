@@ -3,7 +3,8 @@ const router = express.Router();
 
 // DB CONNECTION
 const pool = require('../modules/pool');
-
+//communicates with the data base 
+//gets all of the data from the tasks table 
 router.get('/', (req, res) => {
     let queryText = 'SELECT * FROM "tasks";';
     pool.query(queryText).then(result => {
@@ -14,7 +15,7 @@ router.get('/', (req, res) => {
       res.sendStatus(500);
     });
   })
-
+//puts our new data into the database 
   router.post('/', (req, res) => {
     console.log('req.body', req.body);
     let taskName = req.body.taskName;
@@ -34,6 +35,8 @@ router.get('/', (req, res) => {
     });
 });
 
+    //sends updates made from the fom to the server 
+    //changes the status of complete
     router.put("/T/:id", (req, res) => {
     console.log("In Put", req.params.id, req.body);
     let queryText = `
@@ -67,7 +70,7 @@ router.get('/', (req, res) => {
         res.sendStatus(500);
       });
   });
-
+  //sends deleted update to the database 
   router.delete('/:id', (req, res) => {
     let reqId = req.params.id;
     console.log('Delete request for id', reqId);

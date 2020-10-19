@@ -4,14 +4,14 @@ $(document).ready(function(){
     console.log('jq');
     getTasks();
     clickListeners();
+    //click listener for the delete function 
     $('#targetNewToDo').on('click', '.deleteBtn', deleteTasks);
 });
 
 function clickListeners(){
-    // $('#targetNewToDo').on('click', '.deleteBtn', deleteTask);
     $('#addTask').on('click', function(){
         console.log('in addTask on click');
-        
+        //getting the input values and putting the values into an object
         let taskToSend ={
             taskName: $('#taskName').val(),
             priorityLevel: $('#priorityLevel').val(),
@@ -19,8 +19,7 @@ function clickListeners(){
             completed: $('#completed').val(),
             additionalNotes: $('#additionalNotes').val()
         };
-        // saveTask(taskToSend);
-        // clearInputs();
+        //alert for if inputs are left empty 
         if(taskToSend.taskName === ''|| taskToSend.priorityLevel === '' || taskToSend.deadline === '' || taskToSend.completed === '' || taskToSend.additionalNotes === ''){
             alert('Please enter all fields.');
          } else if (taskToSend.completed.toLowerCase() === 'yes' || taskToSend.completed.toLowerCase() === 'no'){
@@ -32,10 +31,16 @@ function clickListeners(){
          }
        
     });
+    //click listeners for completed and uncompleted task button
     $('#targetNewToDo').on('click', '.completedBtn', completeTask);
     $('#targetNewToDo').on('click', '.uncompleteBtn', unCompleteTask);  
 }
-
+//function for GET 
+//appending table data to the dom
+//sending our data via ajax to the server
+//emptying the dom
+//conditional for if the task is completed or not 
+//if the get doesn't work an error is thrown
 function getTasks(){
     console.log( 'in getTasks' );
   $.ajax({
@@ -78,7 +83,8 @@ function getTasks(){
   });
   
   }
-
+//POST 
+//sending data to the server
   function saveTask(newTask){
     console.log( 'in saveTask', newTask );
     // ajax call to server to get tasks
@@ -89,13 +95,12 @@ function getTasks(){
     }).then(function(response) {
       console.log('response', response);
       getTasks();
-    //   clearInputs();
     }).catch(function(error) {
       console.log('error in post', error);
       
     });
   }
-
+//clearing our Inputs
   function clearInputs(){
     $('#taskName').val('');
     $('#priorityLevel').val('');
@@ -104,9 +109,10 @@ function getTasks(){
     $('#additionalNotes').val('');
   }
 
+  //function for completing a task 
+  //this sends across a completed task change to our list on the dom and the server
   function completeTask(){
     console.log('Completing task!');
-    // let colorToComplete = $(this).closest('tr').addClass("color");
     let idToComplete = $(this).closest('tr').data('id');
     console.log(idToComplete)
     let completeStatus = {
@@ -122,7 +128,8 @@ function getTasks(){
       console.log('In complete', error);
     })
   }
-//Allows user to revers complete 
+//this allows the user to reverse a completed task 
+//sends the new change to the server
   function unCompleteTask(){
     console.log('Whops that was not complete!');
     // $(this).closest('tr').removeClass("color");
@@ -140,6 +147,9 @@ function getTasks(){
       console.log('In uncomplete', error);
     })
   }
+  //this function allows the user to delete a task 
+  //the delete happens to the dom and then sends the message over to the server 
+  //and the database
   function deleteTasks(){
     console.log('delete clicked');
     let taskId = $(this).closest('tr').data('id');

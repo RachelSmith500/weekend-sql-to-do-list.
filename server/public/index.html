@@ -4,44 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="vendors/jquery-3.5.1.min.js" charset="utf-8"></script>
+    <script src="vendors/sweetalert.min.js"></script>
     <script src="scripts/client.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="vendors/bootstrap.css">
+    <link rel="stylesheet" href="styles/style.css">
     <title>To Do App</title>
 </head>
-<body>
+<body class="container">
     <header>
         <p>To Do App</p>
     </header>
     <section id="addNewTask">
         <h2>Add Task</h2>
+        <span class="input-group">
             <label htmlFor "taskName">Task Name:</label>
             <input id="taskName" type="text" placeholder="Task Name"/>
             <label htmlFor "priorityLevel">Priority Level:</label>
-            <input id="priorityLevel" type="text" placeholder="Priority Level"/>
+            <input id="priorityLevel" type="number" placeholder="Priority Level"/>
             <label htmlFor "completionTimeline">Completion Timeline:</label>
             <input id="completionTimeline" type="text" placeholder="Completion Timeline"/>
             <label htmlFor "completed">Completed:</label>
             <input id="completed" type="text" placeholder="Completed"/>
             <label htmlFor "additionalNotes">Additional Notes:</label>
             <input id="additionalNotes" type="text" placeholder="Additional Notes"/>
-            <button type="button" id="addTask">Add Task</button>
+        </span>
+            <button type="button" class="alert alert-success btn-sm" id="addTask">Add Task</button>
+       
     </section>
     <main>
         <h2>All Tasks</h2>
-        <table>
+        <div class= "table-hover">
+        <div class="container-fluid no-padding"> 
+        <table class="table table-bordered">
           <thead>
             <tr>
-              <th>Task Name</th>
-              <th>Priority Level</th>
-              <th>Completion Timeline</th>
-              <th>Completed</th>
-              <th>Additional Notes</th>
-              <th>Mark Completed</th>
-              <th>Remove</th>
+              <th scope="col">Task Name</th>
+              <th scope="col">Priority Level</th>
+              <th scope="col">Completion Timeline</th>
+              <th scope="col">Completed</th>
+              <th scope="col">Additional Notes</th>
+              <th scope="col">Mark Completed</th>
+              <th scope="col">Remove</th>
             </tr>
           </thead>
           <tbody id="targetNewToDo">
           </tbody>
         </table>
+        </div>
+    </div>
     </main>
 </body>
 </html>

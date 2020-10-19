@@ -53,21 +53,21 @@ function getTasks(){
             <td>${response[i].completion_timeline}</td>
             <td>${response[i].completed}</td>
             <td>${response[i].additional_notes}</td>
-            <td><button class="completedBtn">Completed</button></td>
-            <td><button class="deleteBtn">Delete</button></td>
+            <td><button class="completedBtn alert alert-success btn-sm">Mark Completed</button></td>
+            <td><button class="deleteBtn btn btn-danger">Delete</button></td>
         </tr>
       `);
       }
       else {
         $('#targetNewToDo').append(`
-        <tr data-id=${response[i].id}>
+        <tr class="color" data-id=${response[i].id}>
             <td>${response[i].task_name}</td>
             <td>${response[i].priority_level}</td>
             <td>${response[i].completion_timeline}</td>
             <td>${response[i].completed}</td>
             <td>${response[i].additional_notes}</td>
-            <td><button class="uncompleteBtn">Mark as Incomplete</button></td>
-            <td><button class="deleteBtn">Delete</button></td>
+            <td><button class="uncompleteBtn btn btn-warning">Mark Incomplete</button></td>
+            <td><button class="deleteBtn btn btn-danger">Delete</button></td>
             
         </tr>
       `);

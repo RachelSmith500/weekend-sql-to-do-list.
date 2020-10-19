@@ -12,27 +12,48 @@
 </head>
 <body class="container">
     <header>
-        <p>To Do App</p>
+        <h1>To Do Application</h1>
     </header>
     <section id="addNewTask">
-        <h2>Add Task</h2>
-        <span class="input-group">
-            <label htmlFor "taskName">Task Name:</label>
-            <input id="taskName" type="text" placeholder="Task Name"/>
-            <label htmlFor "priorityLevel">Priority Level:</label>
-            <input id="priorityLevel" type="number" placeholder="Priority Level"/>
-            <label htmlFor "completionTimeline">Completion Timeline:</label>
-            <input id="completionTimeline" type="text" placeholder="Completion Timeline"/>
-            <label htmlFor "completed">Completed:</label>
-            <input id="completed" type="text" placeholder="Completed"/>
-            <label htmlFor "additionalNotes">Additional Notes:</label>
-            <input id="additionalNotes" type="text" placeholder="Additional Notes"/>
-        </span>
+        <h3>Add Task</h3>
+        <div class="input-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Task Name</span>
+                </div>
+                <input id="taskName" type="text" class="form-control" placeholder="Task Name" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Priority Level</span>
+              </div>
+              <input id="priorityLevel" type="number" class="form-control" placeholder="Priority Level" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+            </div>
+            <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Completion Timeline</span>
+              </div>
+              <input id="completionTimeline" type="text" class="form-control" placeholder="Completion Timeline" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Completed</span>
+              </div>
+              <input id="completed" type="text" class="form-control" placeholder="yes or no only" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Additional Notes</span>
+              </div>
+              <input id="additionalNotes" type="text" class="form-control" placeholder="Additional Notes" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
             <button type="button" class="alert alert-success btn-sm" id="addTask">Add Task</button>
-       
     </section>
     <main>
-        <h2>All Tasks</h2>
+        <h3>All Tasks</h3>
         <div class= "table-hover">
         <div class="container-fluid no-padding"> 
         <table class="table table-bordered">

@@ -20,7 +20,7 @@
   "homepage": "https://github.com/RachelSmith500/weekend-sql-to-do-list.#readme",
   "dependencies": {
     "bootstrap": "^3.4.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "pg": "^8.4.1"
   }
 }
